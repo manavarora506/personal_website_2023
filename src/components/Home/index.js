@@ -50,8 +50,8 @@ export function Home() {
         {/* Avatar */}
         <div className="justify-center flex dark:hidden mb-6 md:ml-20">
           <Image
-            src="/static/img/avatar.png"
-            alt="Ishan"
+            src="/static/img/manav.jpg"
+            alt="manav"
             width={200}
             height={200}
             quality={100}
@@ -59,10 +59,10 @@ export function Home() {
         </div>
         <div className="justify-center hidden dark:flex mb-6 md:ml-20">
           <Image
-            src="/static/img/ishan.png"
-            alt="Ishan"
-            width={200}
-            height={200}
+            src="/static/img/manav_avatar.png"
+            alt="manav"
+            width={300}
+            height={400}
             quality={100}
           />
         </div>
@@ -74,9 +74,9 @@ export function Home() {
             <SectionContent>
               <div className="prose">
                 <p>
-                  Hey, I&apos;m Ishan. I&apos;m a software engineer, student,{' '}
+                  Hi friends, I&apos;m Manav Arora. I&apos;m a software engineer, {' '}
                   <a 
-                    href="https://ishan.coffee" 
+                    href="https://manavarora.substack.com" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
@@ -88,41 +88,12 @@ export function Home() {
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
-                    tinkerer
+                    reading enthusiast.
                   </a>
-                  . I&apos;m currently building{' '}
-                  <a
-                    href="https://unrealspeech.up.railway.app/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    Unreal Speech
-                  </a>
-                  , a new text-to-speech startup focused on delivering affordable, authentic
-                  voice engines. I&apos;m also wrapping up a double major in computer engineering
-                  and math at UT Austin.
                 </p>
                 <p>
-                  I interned at YouTube this past summer and worked on making ML classification
-                  infrastructure more reliable. Before that, I developed a natural language processing 
-                  pipeline at Capital One to detect fraud in car dealerships using customer reviews.
-                </p>
-                <p>
-                  I&apos;ve also{' '}
-                  <a 
-                    href="https://hai.ischool.utexas.edu/" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                  >
-                    researched responsible AI
-                  </a>
-                  {' '}to tackle Austin homelessness, built a tool to summarize emails, and 
-                  taught a couple hundred students through a combination of teaching classes
-                  and tutoring.
-                </p>
-                <p>
-                  These days, I play a lot of sand volleyball, explore local speakeasies, and 
-                  wander around national parks (attempted to hike Half Dome most recently).
+                  I pride myself on being a fast self-learner and having excpetionally strong communication skills. 
+                  These days I am learning more about full-stack development, generative AI, and cloud computing.
                 </p>
               </div>
             </SectionContent>
@@ -134,31 +105,31 @@ export function Home() {
             <SectionContent>
               <div className="flex flex-col space-y-3">
                 <TableRow
-                  href={'mailto:ishan0102@utexas.edu'}
+                  href={'mailto:manavarora506@gmail.com'}
                   title={'Email'}
                   subtitle={'Send'}
                   date={''}
                 />
                 <TableRow
-                  href={'https://github.com/ishan0102'}
+                  href={'https://github.com/manavarora506'}
                   title={'GitHub'}
                   subtitle={'Browse'}
                   date={''}
                 />
                 <TableRow
-                  href={'https://www.linkedin.com/in/ishan0102/'}
+                  href={'https://www.linkedin.com/in/manav-arora1/'}
                   title={'LinkedIn'}
                   subtitle={'Connect'}
                   date={''}
                 />
                 <TableRow
-                  href={'https://twitter.com/ishan0102'}
+                  href={'https://twitter.com/manavsteel506'}
                   title={'Twitter'}
                   subtitle={'Follow'}
                   date={''}
                 />
                 <TableRow
-                  href={'https://open.spotify.com/user/ishan0102?si=510c088c653249d2'}
+                  href={'https://open.spotify.com/user/31mlvzyl2jwlzr55ythn6roevhqq?si=e5c8716705bb4d80'}
                   title={'Spotify'}
                   subtitle={'Listen'}
                   date={''}
@@ -206,47 +177,12 @@ export function Home() {
             </SectionContent>
           </SectionContainer>
 
-          {/* Research */}
-          <SectionContainer>
-            <SectionTitle>Research</SectionTitle>
-            <SectionContent>
-              <div className="flex flex-col space-y-3">
-                {HomeData.research.map((org) => (
-                  <TableRow
-                    href={org.href}
-                    title={org.title}
-                    subtitle={org.subtitle}
-                    date={org.date}
-                    key={org.href}
-                  />
-                ))}
-              </div>
-            </SectionContent>
-          </SectionContainer>
-
-          {/* Organizations */}
-          <SectionContainer>
-            <SectionTitle>Organizations</SectionTitle>
-            <SectionContent>
-              <div className="flex flex-col space-y-3">
-                {HomeData.organizations.map((org) => (
-                  <TableRow
-                    href={org.href}
-                    title={org.title}
-                    subtitle={org.subtitle}
-                    date={org.date}
-                    key={org.href}
-                  />
-                ))}
-              </div>
-            </SectionContent>
-          </SectionContainer>
-
+      
           {/* Spotify Widget */}
           <SectionContainer>
             <SectionTitle>Music</SectionTitle>
             <SectionContent>
-              <iframe className="rounded-xl" src="https://open.spotify.com/embed/playlist/12DxIGMOK6o2ZQ5PdT8Hzv?utm_source=generator" width="100%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+              <iframe className="rounded-xl" src="https://open.spotify.com/embed/playlist/1PxsVdXItBPeL7MhKDNRmK?utm_source=generator" width="100%" height="380" frameBorder="0" allowFullScreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </SectionContent>
           </SectionContainer>
 

@@ -16,7 +16,7 @@ export function Nav() {
       <div className="flex items-center flex-shrink-0 ml-0 md:ml-4 mr-6">
         <Link href="/">
           <a className="inline-block text-primary text-xl md:text-2xl font-semibold hover:text-indigo-500 font-grenette">
-            Ishan Shah
+            Manav Arora
           </a>
         </Link>
         <button className="items-center bg-off-white ml-2 rounded dark:bg-off-black focus:outline-none" onClick={toggleTheme}>
