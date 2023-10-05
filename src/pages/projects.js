@@ -6,8 +6,8 @@ export default function projects() {
     <>
       <Projects/>
       <Head>
-        <title>Projects • Ishan Shah</title>
-        <meta property="og:title" content="Projects • Ishan Shah" key="title" />
+        <title>Projects • Manav Arora</title>
+        <meta property="og:title" content="Projects • Manav Arora" key="title" />
       </Head>
     </>
   )

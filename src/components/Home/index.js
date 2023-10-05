@@ -24,7 +24,7 @@ function TableRow({ href, title, subtitle, date }) {
       href={href}
       className="flex items-center space-x-4 group"
     >
-      <strong className="flex-none font-medium text-gray-900 group-hover:text-indigo-600 dark:text-gray-100 dark:group-hover:text-indigo-500">
+      <strong className="flex-none font-medium text-gray-900 group-hover:text-sky-500 dark:text-gray-100 dark:group-hover:text-sky-500">
         {title}
       </strong>
       <span className="w-full border-t border-gray-300 border-dashed shrink dark:border-gray-800" />
@@ -48,7 +48,7 @@ export function Home() {
     <Detail.Container>
       <Detail.ContentContainer>
         {/* Avatar */}
-        <div className="justify-center flex dark:hidden mb-6 md:ml-20">
+        {/* <div className="justify-center flex dark:hidden mb-6 md:ml-20">
           <Image
             src="/static/img/manav.jpg"
             alt="manav"
@@ -56,7 +56,7 @@ export function Home() {
             height={200}
             quality={100}
           />
-        </div>
+        </div> */}
         <div className="justify-center hidden dark:flex mb-6 md:ml-20">
           <Image
             src="/static/img/manav_avatar.png"
@@ -84,7 +84,7 @@ export function Home() {
                   </a>
                   , and{' '}
                   <a 
-                    href="https://github.com/ishan0102" 
+                    href="https://www.goodreads.com/user/show/133160408-manav-arora" 
                     target="_blank" 
                     rel="noopener noreferrer"
                   >
@@ -92,7 +92,7 @@ export function Home() {
                   </a>
                 </p>
                 <p>
-                  I pride myself on being a fast self-learner and having excpetionally strong communication skills. 
+                  I am a recent graduate of The University of Texas at Austin where I studied electrical and computer engineering. I pride myself on being a fast self-learner and having excpetionally strong communication skills. 
                   These days I am learning more about full-stack development, generative AI, and cloud computing.
                 </p>
               </div>
@@ -144,17 +144,17 @@ export function Home() {
             <SectionContent>
               <Image
                 priority
-                src="/static/img/austin.png"
+                src="/static/img/parker.png"
                 width={550}
                 height={300}
                 layout="responsive"
                 className="rounded-xl"
                 quality={100}
-                alt="Map of Austin with blue location dot in the middle"
+                alt="Map of Parker"
               />
               <p className="flex items-center justify-end pt-2 space-x-2 text-sm text-quaternary md:text-right">
                 <MapPin size={12} />
-                <span>Austin, TX</span>
+                <span>Parker, TX</span>
               </p>
             </SectionContent>
           </SectionContainer>

@@ -15,11 +15,11 @@
 }
 
 .prose a {
-  @apply font-normal text-indigo-600 break-words no-underline hover:underline hover:underline-offset-2;
+  @apply font-normal text-sky-500 break-words no-underline hover:underline hover:underline-offset-2;
 }
 
 .prose a code {
-  @apply text-indigo-600 dark:text-indigo-500;
+  @apply text-sky-500 dark:text-sky-500;
 }
 
 .prose table {
@@ -168,7 +168,7 @@
 }
 
 .prose sup {
-  @apply text-sm text-indigo-500 dark:text-gray-400;
+  @apply text-sm text-sky-500 dark:text-gray-400;
   vertical-align: super;
   top: 0px;
   position: relative;

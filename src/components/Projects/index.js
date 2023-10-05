@@ -134,9 +134,9 @@ export function Projects() {
                 Contents
               </li>
               {ProjectData.projectsList.map((project, index) => (
-                <li key={index} className="hover:text-indigo-500">
+                <li key={index} className="hover:text-sky-500">
                   <Link href={`#${project.name.replaceAll(" ", "-")}`}>
-                    <a className="block py-1 font-medium text-primary hover:text-indigo-500">
+                    <a className="block py-1 font-medium text-primary hover:text-sky-500">
                       {project.name}
                     </a>
                   </Link>

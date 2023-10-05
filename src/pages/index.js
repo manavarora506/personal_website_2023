@@ -6,8 +6,8 @@ export default function home() {
     <>
       <Home/>
       <Head>
-        <title>Ishan Shah</title>
-        <meta property="og:title" content="Ishan Shah" key="title" />
+        <title>Manav Arora</title>
+        <meta property="og:title" content="Manav Arora" key="title" />
       </Head>
     </>
   )
