@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import Link from 'next/link';
-import { ProjectData } from '../../data/ProjectData'
+import { useState } from "react";
+import Link from "next/link";
+import { ProjectData } from "../../data/ProjectData";
 
 function Project({ name, date, tools, tagline, description, tag, links }) {
   return (
@@ -11,8 +11,17 @@ function Project({ name, date, tools, tagline, description, tag, links }) {
           {name}
         </p>
         <div className="my-auto">
-          <p className={`h-5 w-5 ml-3 rounded-sm ${tag == "Personal" ? "bg-sky-500" : tag == "School" ? "bg-violet-500" : tag == "Work" ? "bg-rose-500" : "bg-emerald-500"}`}>
-          </p>
+          <p
+            className={`h-5 w-5 ml-3 rounded-sm ${
+              tag == "Personal"
+                ? "bg-sky-500"
+                : tag == "School"
+                ? "bg-violet-500"
+                : tag == "Work"
+                ? "bg-rose-500"
+                : "bg-emerald-500"
+            }`}
+          ></p>
         </div>
       </div>
 
@@ -24,7 +33,10 @@ function Project({ name, date, tools, tagline, description, tag, links }) {
       {/* Tools */}
       <div className="flex flex-wrap pt-1">
         {tools.map((tool, index) => (
-          <div key={index} className="border border-off-black rounded-full px-3 py-1 mr-2 mb-2 dark:border-gray-300">
+          <div
+            key={index}
+            className="border border-off-black rounded-full px-3 py-1 mr-2 mb-2 dark:border-gray-300"
+          >
             <p className="text-xs font-medium text-center text-off-black dark:text-gray-300">
               {tool}
             </p>
@@ -42,7 +54,10 @@ function Project({ name, date, tools, tagline, description, tag, links }) {
         {Object.entries(links).map(([key, value], index) => (
           <div key={index}>
             <Link href={value}>
-              <a className={"bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"}
+              <a
+                className={
+                  "bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
+                }
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -53,64 +68,64 @@ function Project({ name, date, tools, tagline, description, tag, links }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export function Projects() {
   const [filter, setFilter] = useState({
-    "School": true,
-    "Personal": true,
-    "Work": true,
-    "Research": true,
-  }
-  )
+    School: true,
+    Personal: true,
+    Work: true,
+    Research: true,
+  });
 
   const handleFilter = (tag) => {
-    setFilter(prevState => ({
+    setFilter((prevState) => ({
       ...prevState,
-      [tag]: !prevState[tag]
-    }))
-  }
+      [tag]: !prevState[tag],
+    }));
+  };
 
+  const filterColors = {
+    School: "violet",
+    Personal: "sky",
+    Work: "rose",
+    Research: "emerald",
+  };
 
   return (
-    <div>
-      <div className="relative flex max-h-screen w-full flex-col overflow-y-auto scroll-smooth">
-        <div className="mx-auto w-full max-w-7xl px-4 pb-52 md:px-8">
-          {/* Filtering */}
-          <p className="flex justify-center pt-2 sm:pt-0 pb-1 text-xl font-medium dark:text-gray-200">Filters</p>
-          <div className="justify-center flex pt-2">
+    <div className="bg-dark-gray p-8">
+      {/* Filtering */}
+      <div className="mb-6">
+        <p className="flex justify-center pt-2 pb-2 sm:pt-0 pb-1 text-2xl font-bold dark:text-gray-200">
+          Filters
+        </p>
+        <div className="flex justify-center space-x-4">
+          {Object.entries(filter).map(([key, value]) => (
             <button
-              className={`p-2 sm:px-4 sm:py-2 text-sm font-medium rounded ${filter['Work'] ? 'bg-rose-500 border-rose-500 text-gray-100' : 'bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white'} focus:outline-none border-2`}
-              onClick={() => handleFilter("Work")}
+              key={key}
+              className={`py-2 px-6 text-sm font-medium rounded-full focus:outline-none border-2 ${
+                value
+                  ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500`
+                  : "bg-dark-gray text-white border-gray-500 hover:bg-gray-700"
+              }`}
+              onClick={() => handleFilter(key)}
             >
-              Work
+              {key}
             </button>
-            <button
-              className={`p-2 sm:px-4 sm:py-2 mx-6 text-sm font-medium rounded ${filter['Research'] ? 'bg-emerald-500 border-emerald-500 text-gray-100' : 'bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white'} focus:outline-none border-2`}
-              onClick={() => handleFilter("Research")}
-            >
-              Research
-            </button>
-            <button
-              className={`p-2 sm:px-4 sm:py-2 text-sm font-medium rounded ${filter['Personal'] ? 'bg-sky-500 border-sky-500 text-gray-100' : 'bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white'} focus:outline-none border-2`}
-              onClick={() => handleFilter("Personal")}
-            >
-              Personal
-            </button>
-            <button
-              className={`p-2 sm:px-4 sm:py-2 mx-6 text-sm font-medium rounded ${filter['School'] ? 'bg-violet-500 border-violet-500 text-gray-100' : 'bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white'} focus:outline-none border-2`}
-              onClick={() => handleFilter("School")}
-            >
-              School
-            </button>
-          </div>
+          ))}
+        </div>
+      </div>
 
-          <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
-            {ProjectData.projectsList.map((project, index) => {
-              if (filter[project.tag]) {
-                return <Project
-                  key={index}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {ProjectData.projectsList.map((project, index) => {
+          if (filter[project.tag]) {
+            return (
+              <div
+                key={index}
+                className="bg-gray-950 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <Project
                   name={project.name}
                   date={project.date}
                   tools={project.tools}
@@ -121,31 +136,11 @@ export function Projects() {
                   github={project.github}
                   links={project.links}
                 />
-              }
-            })}
-          </div>
-        </div>
-
-        {/* Nav */}
-        <div className="fixed z-10 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-90rem))] py-10 overflow-y-auto hidden 2xl:block">
-          <div className="px-8">
-            <ul className="text-slate-700 text-sm leading-6">
-              <li className="mb-4 text-gray-900 dark:text-gray-100">
-                Contents
-              </li>
-              {ProjectData.projectsList.map((project, index) => (
-                <li key={index} className="hover:text-sky-500">
-                  <Link href={`#${project.name.replaceAll(" ", "-")}`}>
-                    <a className="block py-1 font-medium text-primary hover:text-sky-500">
-                      {project.name}
-                    </a>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
-  )
+  );
 }

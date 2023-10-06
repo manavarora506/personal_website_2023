@@ -70,7 +70,7 @@ export function Nav() {
               Bookmarks
             </a>
           </Link>
-          <Link href="/static/pdf/resume.pdf">
+          <Link href="/static/pdf/Manav-Arora-Resume.pdf">
             <a target="_blank" rel="noopener noreferrer" className="inline-block mr-3 text-primary hover:text-sky-500">
               Resume
             </a>

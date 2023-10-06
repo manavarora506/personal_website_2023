@@ -3,10 +3,10 @@ import Link from "next/link";
 
 function Bookmark({ title, link, notes, tag }) {
   return (
-    <div className="px-2 md:px-8 py-4 h-40 shadow-md">
-      {/* Title */}
-      <div className="flex mb-1">
-        <p className="text-2xl font-semibold max-w-max dark:text-gray-200">
+    <div className="px-2 md:px-8 py-4" id={title.replaceAll(" ", "-")}>
+      {/* Title and Tag */}
+      <div className="flex">
+        <p className="text-3xl font-semibold max-w-max dark:text-gray-200">
           {title}
         </p>
         <div className="my-auto">
@@ -26,7 +26,7 @@ function Bookmark({ title, link, notes, tag }) {
 
       {/* Notes */}
       <div className="mb-2 overflow-hidden">
-        <p className="text-xl py-1 dark:text-gray-300 ">{notes}</p>
+        <p className="text-xl py-1 dark:text-gray-300">{notes}</p>
       </div>
 
       {/* Link */}
@@ -55,15 +55,19 @@ function Bookmarks() {
     research: true,
   });
 
-  
+  const filterColors = {
+    school: "violet",
+    personal: "sky",
+    work: "rose",
+    research: "emerald",
+  };
+
   const handleFilter = (tag) => {
     setFilter((prevState) => ({
       ...prevState,
       [tag]: !prevState[tag],
     }));
   };
-
- 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -96,79 +100,49 @@ function Bookmarks() {
     fetchData();
   }, []);
 
+  //
   return (
-    <div className="relative flex max-h-screen w-full flex-col overflow-y-auto scroll-smooth">
-      <div className="mx-auto w-full max-w-7xl px-4 pb-52 md:px-8">
-        <p className="flex justify-center pt-2 sm:pt-0 pb-1 text-xl font-medium dark:text-gray-200">
+    <div className="bg-dark-gray p-8">
+      {/* Filtering */}
+      <div className="mb-6">
+        <p className="flex justify-center pt-2 pb-2 sm:pt-0 pb-1 text-2xl font-bold dark:text-gray-200">
           Filters
         </p>
-        <div className="justify-center flex pt-2">
-          <button
-            className={`p-2 sm:px-4 sm:py-2 text-sm font-medium rounded ${
-              filter["work"]
-                ? "bg-rose-500 border-rose-500 text-gray-100"
-                : "bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white"
-            } focus:outline-none border-2`}
-            onClick={() => handleFilter("work")}
-          >
-            Work
-          </button>
-          <button
-            className={`p-2 sm:px-4 sm:py-2 mx-6 text-sm font-medium rounded ${
-              filter["research"]
-                ? "bg-emerald-500 border-emerald-500 text-gray-100"
-                : "bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white"
-            } focus:outline-none border-2`}
-            onClick={() => handleFilter("research")}
-          >
-            Research
-          </button>
-          <button
-            className={`p-2 sm:px-4 sm:py-2 text-sm font-medium rounded ${
-              filter["personal"]
-                ? "bg-sky-500 border-sky-500 text-gray-100"
-                : "bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white"
-            } focus:outline-none border-2`}
-            onClick={() => handleFilter("personal")}
-          >
-            Personal
-          </button>
-          <button
-            className={`p-2 sm:px-4 sm:py-2 mx-6 text-sm font-medium rounded ${
-              filter["school"]
-                ? "bg-violet-500 border-violet-500 text-gray-100"
-                : "bg-inherit bg-off-white border border-off-black dark:border-off-white text-off-black dark:text-off-white"
-            } focus:outline-none border-2`}
-            onClick={() => handleFilter("school")}
-          >
-            School
-          </button>
+        <div className="flex justify-center space-x-4">
+          {Object.entries(filter).map(([key, value]) => (
+            <button
+              key={key}
+              className={`py-2 px-6 text-sm font-medium rounded-full focus:outline-none border-2 ${
+                value
+                  ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500`
+                  : "bg-dark-gray text-white border-gray-500 hover:bg-gray-700"
+              }`}
+              onClick={() => handleFilter(key)}
+            >
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </button>
+          ))}
         </div>
+      </div>
 
-        <div className="grid grid-cols-1 mt-4 md:grid-cols-2 gap-4">
-          {bookmarks.map((bookmark, index) => {
-            console.log(
-              `Checking bookmark at index ${index} with tag: ${bookmark.tag}`
-            );
-
-            if (filter[bookmark.tag]) {
-              console.log(`Rendering bookmark at index ${index}`);
-              return (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto max-h-[80vh]">
+        {bookmarks.map((bookmark, index) => {
+          if (filter[bookmark.tag]) {
+            return (
+              <div
+                key={index}
+                className="bg-gray-950 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+              >
                 <Bookmark
-                  key={index}
                   title={bookmark.title}
                   link={bookmark.link}
                   notes={bookmark.notes}
-                  tag={bookmark.tag.toLowerCase()}
+                  tag={bookmark.tag}
                 />
-              );
-            } else {
-              console.log(`Skipping bookmark at index ${index}`);
-            }
-          })}
-        </div>
-
-        
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
   );
