@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { MapPin } from 'react-feather'
 import { Detail } from '../Detail'
 import { HomeData } from '../../data/HomeData'
+import Chatbot from '../Chatbot'
 
 function SectionTitle(props) {
   return (

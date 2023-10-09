@@ -9,21 +9,21 @@
 
   /* handles safari overscroll background color */
   body:after {
-    content: '';
+    content: "";
     position: fixed;
     top: -50%;
     right: -50%;
     bottom: -50%;
     left: -50%;
     z-index: -1;
-    font-family: 'grenette_regular', 'dazzed_medium', sans-serif;
+    font-family: "grenette_regular", "dazzed_medium", sans-serif;
     @apply bg-off-white dark:bg-off-black;
   }
 
   /* Inflection Font */
   @font-face {
-    font-family: 'grenette_regular';
-    src: url('../../public/static/fonts/grenette-regular.woff') format('woff');
+    font-family: "grenette_regular";
+    src: url("../../public/static/fonts/grenette-regular.woff") format("woff");
     font-weight: normal;
     font-style: normal;
   }
@@ -31,6 +31,77 @@
 
 /* Your own custom utilities */
 @layer utilities {
+  /* .chatbot-header {
+    @apply flex justify-between items-center p-2 bg-elevated border-b border-gray-300;
+  } */
+  /* .chatbot-header {
+    @apply bg-indigo-600 text-white px-4 py-2 flex justify-between items-center;
+  } */
+  
+  .chatbot-input input {
+    @apply w-full p-2 border rounded;
+  }
+  
+  /* .chatbot-input button {
+    @apply mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700;
+  } */
+  .chatbot-close {
+    @apply p-2 cursor-pointer;
+  }
+  
+  .bot-message {
+    @apply ml-2 my-2;
+  }
+  
+  .user-message {
+    @apply mr-2 my-2;
+  }
+  .chatbot-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 300px;
+    height: 400px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   
+  }
+
+  .chatbot-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .bot-message,
+  .user-message {
+    padding: 0.5rem 1rem;
+    border-radius: 16px;
+    margin: 0.5rem;
+  }
+
+  .bot-message {
+    background-color: #e5e7eb;
+    align-self: flex-start;
+  }
+
+  .user-message {
+    background-color: #4f46e5;
+    align-self: flex-end;
+    color: #ffffff;
+  }
+
   .text-primary {
     @apply text-gray-900 dark:text-slate-200;
   }
@@ -82,6 +153,6 @@
   }
 
   .font-grenette {
-    font-family: 'grenette_regular', 'dazzed_medium', sans-serif;
+    font-family: "grenette_regular", "dazzed_medium", sans-serif;
   }
 }

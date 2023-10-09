@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ProjectData } from "../../data/ProjectData";
+import Chatbot from "../Chatbot";
 
 function Project({ name, date, tools, tagline, description, tag, links }) {
   return (
     <div className="px-2 md:px-8 py-4" id={name.replaceAll(" ", "-")}>
+      <Chatbot />
+
       {/* Name and Tag */}
       <div className="flex">
         <p className="text-3xl font-semibold max-w-max dark:text-gray-200">

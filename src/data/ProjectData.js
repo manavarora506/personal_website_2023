@@ -1,22 +1,4 @@
 const projectsList = [
-// TODO: Add mahowald/HAI lab research projects
-//  {
-//     name: "Smart Exercise",
-//     date: "Fall 2021",
-//     tools: ["Python", "PyTorch", "React", "Node.js", "MongoDB"],
-//     tagline: "A smart exercise app",
-//     description: `
-//       Smart Exercise is a web app that uses computer vision to track your exercise form and
-//       provide real-time feedback. I built this with a team of 4 other students for our
-//       final project in CS 329E. I worked on the frontend, backend, and computer vision
-//       components of the project.
-//     `,
-//     tag: "School",
-//     links: {
-//       "Website": "https://smart-exercise.herokuapp.com/",
-//       "GitHub": "https://github.com"
-//     }
-//   },
   {
     name: "Privacy Check",
     date: "Spring 2023",
@@ -31,8 +13,8 @@ const projectsList = [
     `,
     tag: "School",
     links: {
-      "Website": "https://github.com/UTCID/PrivacyCheck/tree/manav-test",
-    }
+      Website: "https://github.com/UTCID/PrivacyCheck/tree/manav-test",
+    },
   },
   {
     name: "Interview GPT",
@@ -46,8 +28,8 @@ const projectsList = [
     `,
     tag: "Personal",
     links: {
-      "Website": "https://github.com/InterviewGPT/web-app",
-    }
+      Website: "https://github.com/InterviewGPT/web-app",
+    },
   },
 
   {
@@ -60,25 +42,25 @@ const projectsList = [
     `,
     tag: "Work",
     links: {
-      "Website": "https://github.com/manavarora506/frontend-intern-hackday",
-    }
+      Website: "https://github.com/manavarora506/frontend-intern-hackday",
+    },
   },
-  
+
   {
     name: "Personal Website",
     date: "Fall 2023",
-    tools: ["Next.js", "Tailwind CSS", "Netlify"],
+    tools: ["Next.js", "Tailwind CSS", "Netlify", "Postman", "OpenAI API", "Notion API"],
     tagline: "This website!",
     description: `
         This website encapsulates all of my work!
       `,
     tag: "Personal",
     links: {
-      "Website": "/",
-      "GitHub": "https://github.com/ishan0102/ishanshah.me",
+      Website: "/",
+      GitHub: "https://github.com/manavarora506/personal_website_2023",
     },
   },
-  
+
   {
     name: "Baseball Pitch Type Prediction",
     date: "Spring 2023",
@@ -90,31 +72,29 @@ const projectsList = [
       `,
     tag: "School",
     links: {
-      "Medium Article": "https://medium.com/@manavarora506/baseball-pitch-type-prediction-16aa7ae1e4f0",
-      "GitHub": "https://github.com/jrdsouza3/dslfinal/tree/main",
+      "Medium Article":
+        "https://medium.com/@manavarora506/baseball-pitch-type-prediction-16aa7ae1e4f0",
+      GitHub: "https://github.com/jrdsouza3/dslfinal/tree/main",
     },
   },
- 
 
- 
   {
-    name: "Longhorn Computing Services",
+    name: "Longhorn Hardware Services",
     date: "Spring 2022",
     tools: ["Flask", "React", "Heroku"],
-    tagline: "Cloud computing manager",
+    tagline: "Hardware Managing Platform",
     description: `
-        This was a semester-long project for Software Engineering Lab (EE 461L).
-        I worked on the APIs for a service that allows users to manage their cloud
-        computing resources.
+        This was a semester-long project for Software Engineering Lab (EE 461L) where we created a management
+        platform to rent and return UT hardware.
+        
       `,
     tag: "School",
     links: {
-      "GitHub": "https://github.com/pranavswami/461l",
+      GitHub: "https://github.com/pranavswami/461l",
     },
   },
- 
-]
+];
 
 export const ProjectData = {
   projectsList,
-}
+};
