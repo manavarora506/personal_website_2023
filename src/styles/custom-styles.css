@@ -31,19 +31,18 @@
 
 /* Your own custom utilities */
 @layer utilities {
-  
   .chatbot-input input {
     @apply w-full p-2 border rounded;
   }
-  
+
   .chatbot-close {
     @apply p-2 cursor-pointer;
   }
-  
+
   .bot-message {
     @apply ml-2 my-2;
   }
-  
+
   .user-message {
     @apply mr-2 my-2;
   }
@@ -58,7 +57,6 @@
     background-color: #ffffff;
     overflow-y: auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-   
   }
 
   .chatbot-toggle {
@@ -83,7 +81,7 @@
   }
 
   .bot-message {
-    background-color: #e5e7eb;
+    background-color: #faf9f6;
     align-self: flex-start;
   }
 

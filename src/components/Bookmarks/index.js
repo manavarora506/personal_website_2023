@@ -9,19 +9,6 @@ function Bookmark({ title, link, notes, tag }) {
         <p className="text-3xl font-semibold max-w-max dark:text-gray-200">
           {title}
         </p>
-        <div className="my-auto">
-          <p
-            className={`h-5 w-5 ml-3 rounded-sm ${
-              tag == "personal"
-                ? "bg-sky-500"
-                : tag == "school"
-                ? "bg-violet-500"
-                : tag == "work"
-                ? "bg-rose-500"
-                : "bg-emerald-500"
-            }`}
-          ></p>
-        </div>
       </div>
 
       {/* Notes */}
@@ -40,6 +27,19 @@ function Bookmark({ title, link, notes, tag }) {
             Visit
           </a>
         </Link>
+        <div className="my-auto">
+          <p
+            className={`h-5 w-5 ml-3 rounded-sm ${
+              tag == "personal"
+                ? "bg-sky-500"
+                : tag == "school"
+                ? "bg-violet-500"
+                : tag == "work"
+                ? "bg-rose-500"
+                : "bg-emerald-500"
+            }`}
+          ></p>
+        </div>
       </div>
     </div>
   );
@@ -104,24 +104,25 @@ function Bookmarks() {
   return (
     <div className="bg-dark-gray p-8">
       {/* Filtering */}
-      <div className="mb-6">
-        <p className="flex justify-center pt-2 pb-2 sm:pt-0 pb-1 text-2xl font-bold dark:text-gray-200">
-          Filters
-        </p>
-        <div className="flex justify-center space-x-4">
-          {Object.entries(filter).map(([key, value]) => (
-            <button
-              key={key}
-              className={`py-2 px-6 text-sm font-medium rounded-full focus:outline-none border-2 ${
-                value
-                  ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500`
-                  : "bg-dark-gray text-white border-gray-500 hover:bg-gray-700"
-              }`}
-              onClick={() => handleFilter(key)}
-            >
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </button>
-          ))}
+      <div className="text-center mb-6">
+        <div className="p-6 rounded-xl shadow-md dark:bg-dark-gray inline-flex flex-col items-center">
+          <p className="text-2xl font-bold dark:text-gray-200 mb-4">Filters</p>
+          <div className="flex justify-center space-x-2">
+            {Object.entries(filter).map(([key, value]) => (
+              <button
+                key={key}
+                className={`py-2 px-6 text-sm font-medium rounded-full focus:outline-none border-2 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
+  ${
+    value
+      ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500 hover:bg-opacity-70 active:bg-opacity-80 active:scale-95`
+      : "bg-dark-gray text-gray-500 border-gray-500 hover:bg-opacity-70 dark:text-white"
+  }`}
+                onClick={() => handleFilter(key)}
+              >
+                {key}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

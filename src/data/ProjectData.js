@@ -26,7 +26,7 @@ const projectsList = [
       Designed a user interface to model a code editor using the AceEditor library from React and utilized LangChain to serve as the main engine for the 
       application.
     `,
-    tag: "Personal",
+    tag: "personal",
     links: {
       Website: "https://github.com/InterviewGPT/web-app",
     },
@@ -40,7 +40,7 @@ const projectsList = [
     description: `
       Leveraged the GitHub search API to design an interactive website to search and view repositories and their commits.
     `,
-    tag: "Work",
+    tag: "work",
     links: {
       Website: "https://github.com/manavarora506/frontend-intern-hackday",
     },
@@ -49,12 +49,19 @@ const projectsList = [
   {
     name: "Personal Website",
     date: "Fall 2023",
-    tools: ["Next.js", "Tailwind CSS", "Netlify", "Postman", "OpenAI API", "Notion API"],
+    tools: [
+      "Next.js",
+      "Tailwind CSS",
+      "Netlify",
+      "Postman",
+      "OpenAI API",
+      "Notion API",
+    ],
     tagline: "This website!",
     description: `
         This website encapsulates all of my work!
       `,
-    tag: "Personal",
+    tag: "personal",
     links: {
       Website: "/",
       GitHub: "https://github.com/manavarora506/personal_website_2023",
@@ -70,7 +77,7 @@ const projectsList = [
         For my final project in Data Science Lab (EE 460J), my group used baseball statistics and trained a model to
         predict the next pitch that would be thrown.
       `,
-    tag: "School",
+    tag: "school",
     links: {
       "Medium Article":
         "https://medium.com/@manavarora506/baseball-pitch-type-prediction-16aa7ae1e4f0",
@@ -88,7 +95,7 @@ const projectsList = [
         platform to rent and return UT hardware.
         
       `,
-    tag: "School",
+    tag: "school",
     links: {
       GitHub: "https://github.com/pranavswami/461l",
     },
