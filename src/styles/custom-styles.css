@@ -31,20 +31,11 @@
 
 /* Your own custom utilities */
 @layer utilities {
-  /* .chatbot-header {
-    @apply flex justify-between items-center p-2 bg-elevated border-b border-gray-300;
-  } */
-  /* .chatbot-header {
-    @apply bg-indigo-600 text-white px-4 py-2 flex justify-between items-center;
-  } */
   
   .chatbot-input input {
     @apply w-full p-2 border rounded;
   }
   
-  /* .chatbot-input button {
-    @apply mt-2 bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700;
-  } */
   .chatbot-close {
     @apply p-2 cursor-pointer;
   }

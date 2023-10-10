@@ -2,7 +2,10 @@ import React, { useState } from "react";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+  // const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([
+    { type: "bot", content: "Hi, I'm an AI bot that can answer all questions related to Manav." }
+  ]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
