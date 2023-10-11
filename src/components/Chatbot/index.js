@@ -22,19 +22,28 @@ function Chatbot() {
     }
   }, []);
 
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
+  const toggleChatbot = () => {
+    if(isOpen) {
+        document.body.style.overflow = "auto";
     } else {
-      document.body.style.overflow = "auto";
+        document.body.style.overflow = "hidden";
     }
+    setIsOpen(!isOpen);
+};
 
-    window.addEventListener("resize", handleResize);
-    return () => {
-      document.body.style.overflow = "auto";
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [isOpen, handleResize]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     document.body.style.overflow = "hidden";
+  //   } else {
+  //     document.body.style.overflow = "auto";
+  //   }
+
+  //   window.addEventListener("resize", handleResize);
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, [isOpen, handleResize]);
 
   const handleSendMessage = async () => {
     setIsLoading(true);
@@ -68,7 +77,8 @@ function Chatbot() {
     <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
       <div
         className="chatbot-toggle bg-black border hover:bg-off-white hover:text-off-black font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-white dark:text-off-black dark:hover:bg-off-black dark:hover:text-off-white"
-        onClick={() => setIsOpen(!isOpen)}
+        // onClick={() => setIsOpen(!isOpen)}
+        onClick={toggleChatbot}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
