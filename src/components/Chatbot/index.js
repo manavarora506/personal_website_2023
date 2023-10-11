@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +12,15 @@ function Chatbot() {
   ]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [bottomPosition, setBottomPosition] = useState("5%");
+
+  const handleResize = useCallback(() => {
+    if (window.innerHeight < 400) {
+      setBottomPosition("50%");
+    } else {
+      setBottomPosition("5%");
+    }
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
@@ -20,10 +29,12 @@ function Chatbot() {
       document.body.style.overflow = "auto";
     }
 
+    window.addEventListener("resize", handleResize);
     return () => {
       document.body.style.overflow = "auto";
+      window.removeEventListener("resize", handleResize);
     };
-  }, [isOpen]);
+  }, [isOpen, handleResize]);
 
   const handleSendMessage = async () => {
     setIsLoading(true);
@@ -47,7 +58,6 @@ function Chatbot() {
     setInputFocus(false);
     window.scrollTo(0, 0);
   };
-
   return (
     <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
       <div
