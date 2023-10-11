@@ -3,14 +3,16 @@
 @tailwind utilities;
 
 @layer base {
-  /* html {
-    @apply max-h-screen overflow-hidden text-xs antialiased;
-  } */
-
   html {
     @apply text-xs antialiased;
-}
+  }
 
+  @media (min-width: 640px) {
+    /* 640px is the default breakpoint for 'md' in Tailwind */
+    html {
+      @apply overflow-hidden;
+    }
+  }
   /* handles safari overscroll background color */
   body:after {
     content: "";
@@ -39,7 +41,7 @@
     overflow-x: hidden;
     position: relative;
   }
-  
+
   .projects-container {
     max-height: calc(
       100vh - 100px
