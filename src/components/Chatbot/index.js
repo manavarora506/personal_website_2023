@@ -22,28 +22,19 @@ function Chatbot() {
     }
   }, []);
 
-  const toggleChatbot = () => {
-    if(isOpen) {
-        document.body.style.overflow = "auto";
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
     } else {
-        document.body.style.overflow = "hidden";
+      document.body.style.overflow = "auto";
     }
-    setIsOpen(!isOpen);
-};
 
-  // useEffect(() => {
-  //   if (isOpen) {
-  //     document.body.style.overflow = "hidden";
-  //   } else {
-  //     document.body.style.overflow = "auto";
-  //   }
-
-  //   window.addEventListener("resize", handleResize);
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, [isOpen, handleResize]);
+    window.addEventListener("resize", handleResize);
+    return () => {
+      document.body.style.overflow = "auto";
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [isOpen, handleResize]);
 
   const handleSendMessage = async () => {
     setIsLoading(true);
@@ -65,20 +56,13 @@ function Chatbot() {
 
   const handleInputBlur = () => {
     setInputFocus(false);
-    window.scrollTo(0, 0);
   };
-
-  const handleCloseChatbot = () => {
-    setIsOpen(false);
-    window.scrollTo(0, 0);
-};
 
   return (
     <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
       <div
         className="chatbot-toggle bg-black border hover:bg-off-white hover:text-off-black font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-white dark:text-off-black dark:hover:bg-off-black dark:hover:text-off-white"
-        // onClick={() => setIsOpen(!isOpen)}
-        onClick={toggleChatbot}
+        onClick={() => setIsOpen(!isOpen)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -97,34 +81,31 @@ function Chatbot() {
       </div>
 
       {isOpen && (
-        <div className="chatbot-container">
+        <div className="chatbot-container max-h-[80vh] overflow-hidden rounded">
           <div className="chatbot-header p-2 bg-off-white flex justify-between items-center">
             <p className="text-3xl font-semibold max-w-max dark:text-black">
-              {" "}
-              manav-ai{" "}
+              manav-ai
             </p>
             <button
-              onClick={handleCloseChatbot}
+              onClick={() => setIsOpen(false)}
               className="bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
             >
               X
-            </button>{" "}
+            </button>
           </div>
-          <div className="chatbot-messages p-2 space-y-4">
+
+          <div className="chatbot-messages p-2 space-y-4 overflow-y-auto max-h-[70vh]">
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`p-2 rounded-lg ${
-                  message.type === "user"
-                    ? "bg-sky-200 self-end"
-                    : "bg-gray-100"
-                }`}
+                className={`p-2 rounded-lg ${message.type === "user" ? "bg-sky-200 self-end" : "bg-gray-100"}`}
               >
                 {message.content}
               </div>
             ))}
             {isLoading && <div className="bot-message">Loading...</div>}
           </div>
+
           <div className="chatbot-input p-2">
             <input
               onFocus={() => setInputFocus(true)}
