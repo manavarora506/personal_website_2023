@@ -58,6 +58,12 @@ function Chatbot() {
     setInputFocus(false);
     window.scrollTo(0, 0);
   };
+
+  const handleCloseChatbot = () => {
+    setIsOpen(false);
+    window.scrollTo(0, 0);
+};
+
   return (
     <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
       <div
@@ -88,7 +94,7 @@ function Chatbot() {
               manav-ai{" "}
             </p>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={handleCloseChatbot}
               className="bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
             >
               X
