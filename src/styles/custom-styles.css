@@ -31,6 +31,13 @@
 
 /* Your own custom utilities */
 @layer utilities {
+  .projects-container {
+    max-height: calc(
+      100vh - 100px
+    ); /* Assuming you want to leave 100px for other UI elements, adjust as needed */
+    overflow-y: auto;
+  }
+
   .chatbot-input input {
     @apply w-full p-2 border rounded;
   }

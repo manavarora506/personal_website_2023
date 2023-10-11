@@ -97,7 +97,7 @@ export function Projects() {
   };
 
   return (
-    <div className="bg-dark-gray p-8">
+    <div className="bg-dark-gray p-8 projects-container">
       {/* Filtering */}
       <div className="text-center mb-6">
         <div className="p-6 rounded-xl shadow-md dark:bg-dark-gray inline-flex flex-col items-center">

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isInputFocused, setInputFocus] = useState(false);
   const [messages, setMessages] = useState([
     {
       type: "bot",
@@ -11,6 +12,18 @@ function Chatbot() {
   ]);
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isOpen]);
 
   const handleSendMessage = async () => {
     setIsLoading(true);
@@ -30,8 +43,13 @@ function Chatbot() {
     setIsLoading(false);
   };
 
+  const handleInputBlur = () => {
+    setInputFocus(false);
+    window.scrollTo(0, 0);
+  };
+
   return (
-    <div className="fixed bottom-5 right-5">
+    <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
       <div
         className="chatbot-toggle bg-black border hover:bg-off-white hover:text-off-black font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-white dark:text-off-black dark:hover:bg-off-black dark:hover:text-off-white"
         onClick={() => setIsOpen(!isOpen)}
@@ -83,8 +101,8 @@ function Chatbot() {
           </div>
           <div className="chatbot-input p-2">
             <input
-              type="text"
-              value={userInput}
+              onFocus={() => setInputFocus(true)}
+              onBlur={handleInputBlur}
               onChange={(e) => setUserInput(e.target.value)}
               placeholder="Type your message..."
               className="w-full p-2 border rounded"
