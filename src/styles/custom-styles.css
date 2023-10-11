@@ -3,9 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  /* html {
     @apply max-h-screen overflow-hidden text-xs antialiased;
-  }
+  } */
+
+  html {
+    @apply text-xs antialiased;
+}
 
   /* handles safari overscroll background color */
   body:after {
