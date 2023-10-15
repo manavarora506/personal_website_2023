@@ -58,7 +58,7 @@ export function Home() {
       <Detail.ContentContainer>
         {/* Avatar */}
 
-        <div className="justify-center hidden dark:flex mb-6 md:ml-20">
+        <div className="justify-center flex mb-6 md:ml-20">
           <Image
             src="/static/img/manav_avatar.png"
             alt="manav"

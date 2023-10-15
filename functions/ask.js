@@ -14,8 +14,9 @@ exports.handler = async function (event, context) {
     contact: "469-442-9910 | manavarora506@gmail.com",
     social: "LinkedIn: /in/manav-arora1/ | GitHub: manavarora506",
     education:
-      "B.S. in Electrical and Computer Engineering with Business Minor from The University of Texas at Austin (2019-2023). Key Courses: Software Design, Algorithms, Digital Signal Processing, Data Science Lab",
+      "B.S. in Electrical and Computer Engineering from The University of Texas at Austin (2019-2023). Key Courses: Software Design, Algorithms, Digital Signal Processing, Data Science Lab",
     experience: [
+      "Software Dev. Engineer I, AT&T, Plano, TX Oct 2023-Present. Automating processes using Python and Anaconda to streamline data collection tasks ",
       "Software Dev. Engineer Intern, GoLinks (YC ’19), CA (Remote) Jul-Sep 2023. Enhanced GoSearch and improved answer components.",
       "Software Dev. Engineer Intern, Amazon, Austin, TX May-Aug 2022. Developed a color-swatch component in TypeScript/CSS.",
       "Training Development Intern, Mavenir, Richardson, TX May-Oct 2021. Created curriculum for 5G and Open-RAN.",
@@ -23,10 +24,9 @@ exports.handler = async function (event, context) {
     projects:
       "PrivacyCheck (May 2023): DynamoDB cache in React. Interview GPT (May 2023): ChatGPT for tech interview practice.",
     skills:
-      "Java, Python, JavaScript, TypeScript, MATLAB, React, Node.js, Flask, JUnit, MongoDB, Git, Docker, VS Code, Visual Studio, IntelliJ, pandas, NumPy, MaterialUI",
+      "Java, Python, JavaScript, TypeScript, MATLAB, React, Node.js, Flask, JUnit, MongoDB, Git, Docker, VS Code, Visual Studio, IntelliJ, pandas, NumPy, MaterialUI, postman",
   };
 
-  
   const messages = [
     {
       role: "system",
