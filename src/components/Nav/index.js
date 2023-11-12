@@ -74,6 +74,15 @@ export function Nav() {
               Writing
             </a>
           </Link>
+          <Link href="https://manavarora.xyz/">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mr-3 md:mr-8 text-primary hover:text-sky-500"
+            >
+              Notes
+            </a>
+          </Link>
           <Link href="/bookmarks">
             <a className="inline-block mr-3 md:mr-8 text-primary hover:text-sky-500">
               Bookmarks
