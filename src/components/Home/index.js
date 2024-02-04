@@ -60,7 +60,7 @@ export function Home() {
 
         <div className="justify-center flex mb-6 md:ml-20">
           <Image
-            src="/static/img/manav_avatar.png"
+            src="/static/img/manav_smiling.jpeg"
             alt="manav"
             width={300}
             height={400}
