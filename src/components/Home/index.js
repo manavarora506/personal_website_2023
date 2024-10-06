@@ -152,17 +152,17 @@ export function Home() {
             <SectionContent>
               <Image
                 priority
-                src="/static/img/parker.png"
+                src="/static/img/waller_pic.png"
                 width={550}
                 height={300}
                 layout="responsive"
                 className="rounded-xl"
                 quality={100}
-                alt="Map of Parker"
+                alt="Map of Austin"
               />
               <p className="flex items-center justify-end pt-2 space-x-2 text-sm text-quaternary md:text-right">
                 <MapPin size={12} />
-                <span>Parker, TX</span>
+                <span>Austin, TX</span>
               </p>
             </SectionContent>
           </SectionContainer>

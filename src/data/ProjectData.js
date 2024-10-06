@@ -1,5 +1,46 @@
 const projectsList = [
   {
+    name: "A/B Testing Contact Form Project",
+    date: "Fall 2024",
+    tools: ["Flask", "Python", "React", "MongoDB", "FastAPI"],
+    tagline: "A/B Testing Framework",
+    description: `
+        This project implements an A/B testing system for evaluating changes in contact form submission behavior on two different sites, Site A and Site B. 
+        The system tracks metrics such as form submissions and visits for each site, allowing for a dynamic, admin-controlled frontend configuration for Site B.
+      `,
+    tag: "personal",
+    links: {
+      GitHub: "https://github.com/manavarora506/A-B-Testing",
+    },
+  },
+  {
+    name: "Travel Itinerary Generator",
+    date: "Summer 2024",
+    tools: ["Flask", "Python", "React"],
+    tagline: "Discover what to do on your next trip",
+    description: `
+        A web application that generates travel itineraries based on user input, providing detailed travel plans
+        using AI and up-to-date information.
+      `,
+    tag: "personal",
+    links: {
+      GitHub: "https://github.com/manavarora506/travel_agent",
+    },
+  },
+  {
+    name: "Cologne Finder",
+    date: "Spring 2024",
+    tools: ["Xcode", "Swift"],
+    tagline: "Find a cologne that fits the mood and budget",
+    description: `
+        Consumers in the market for a new cologne can find a scent they like within their budget and mood that they are looking for.
+      `,
+    tag: "personal",
+    links: {
+      GitHub: "https://github.com/manavarora506/Cologne_Finder",
+    },
+  },
+  {
     name: "Privacy Check",
     date: "Spring 2023",
     tools: ["JavaScript", "React", "DynamoDB"],
@@ -31,7 +72,6 @@ const projectsList = [
       Website: "https://github.com/InterviewGPT/web-app",
     },
   },
-
   {
     name: "GoLinks Hackday",
     date: "Summer 2023",
@@ -45,7 +85,6 @@ const projectsList = [
       Website: "https://github.com/manavarora506/frontend-intern-hackday",
     },
   },
-
   {
     name: "Personal Website",
     date: "Fall 2023",
@@ -67,7 +106,6 @@ const projectsList = [
       GitHub: "https://github.com/manavarora506/personal_website_2023",
     },
   },
-
   {
     name: "Baseball Pitch Type Prediction",
     date: "Spring 2023",
@@ -84,7 +122,6 @@ const projectsList = [
       GitHub: "https://github.com/jrdsouza3/dslfinal/tree/main",
     },
   },
-
   {
     name: "Longhorn Hardware Services",
     date: "Spring 2022",
@@ -101,7 +138,6 @@ const projectsList = [
     },
   },
 ];
-
 export const ProjectData = {
   projectsList,
 };

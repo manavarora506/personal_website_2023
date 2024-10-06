@@ -22,7 +22,7 @@ exports.handler = async function (event, context) {
       "Training Development Intern, Mavenir, Richardson, TX May-Oct 2021. Created curriculum for 5G and Open-RAN.",
     ],
     projects:
-      "PrivacyCheck (May 2023): DynamoDB cache in React. Interview GPT (May 2023): ChatGPT for tech interview practice.",
+      "PrivacyCheck (May 2023): DynamoDB cache in React. Travel Itinerary (May 2024): A web application that generates travel itineraries using AI and Google Custom Search",
     skills:
       "Java, Python, JavaScript, TypeScript, MATLAB, React, Node.js, Flask, JUnit, MongoDB, Git, Docker, VS Code, Visual Studio, IntelliJ, pandas, NumPy, MaterialUI, postman",
   };

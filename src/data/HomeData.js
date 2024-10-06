@@ -1,7 +1,7 @@
 const workHistory = [
   {
     title: "AT&T",
-    subtitle: "Software Engineer Consultant",
+    subtitle: "Software Engineer",
     date: "Oct 2023-Present\u00a0",
   },
   {

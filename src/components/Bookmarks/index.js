@@ -1,53 +1,59 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
+import { format } from "date-fns";
 
-function Bookmark({ title, link, notes, tag }) {
+function Bookmark({ title, link, notes, tag, dateAdded }) {
   return (
-    <div className="px-2 md:px-8 py-4" id={title.replaceAll(" ", "-")}>
-      {/* Title and Tag */}
-      <div className="flex">
-        <p className="text-3xl font-semibold max-w-max dark:text-gray-200">
-          {title}
-        </p>
-      </div>
-
-      {/* Notes */}
-      <div className="mb-2 overflow-hidden">
-        <p className="text-xl py-1 dark:text-gray-300">{notes}</p>
-      </div>
-
-      {/* Link */}
-      <div className="mt-2 flex flex-wrap">
+    <div className="flex flex-col md:flex-row items-start justify-between p-3 border-b border-gray-300 dark:border-gray-700">
+      <div className="flex-1">
+        {/* Title */}
         <Link href={link}>
           <a
-            className="bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
+            className="text-lg font-semibold dark:text-gray-200 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Visit
+            {title}
           </a>
         </Link>
-        <div className="my-auto">
-          <p
-            className={`h-5 w-5 ml-3 rounded-sm ${
-              tag == "personal"
-                ? "bg-sky-500"
-                : tag == "school"
-                ? "bg-violet-500"
-                : tag == "work"
-                ? "bg-rose-500"
-                : "bg-emerald-500"
-            }`}
-          ></p>
-        </div>
+
+        {/* Notes */}
+        {notes && (
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            {notes.length > 100 ? notes.slice(0, 100) + "..." : notes}
+          </p>
+        )}
+      </div>
+
+      {/* Date & Tag */}
+      <div className="mt-2 md:mt-0 flex items-center space-x-4">
+        {dateAdded && (
+          <p className="text-xs text-gray-500 dark:text-gray-400">
+            {format(new Date(dateAdded), "MMM dd, yyyy")}
+          </p>
+        )}
+        <div className={`h-4 w-4 rounded-full ${getTagColor(tag)}`}></div>
       </div>
     </div>
   );
 }
 
+function getTagColor(tag) {
+  switch (tag) {
+    case "personal":
+      return "bg-sky-500";
+    case "school":
+      return "bg-violet-500";
+    case "work":
+      return "bg-rose-500";
+    default:
+      return "bg-emerald-500";
+  }
+}
+
 function Bookmarks() {
   const [bookmarks, setBookmarks] = useState([]);
-
+  const [searchQuery, setSearchQuery] = useState(""); // Search query state
   const [filter, setFilter] = useState({
     school: true,
     personal: true,
@@ -89,6 +95,7 @@ function Bookmarks() {
             page.properties.tag.rich_text[0].text.content
               ? page.properties.tag.rich_text[0].text.content
               : "",
+          dateAdded: page.properties["Date Added"]?.date?.start || null,  // Extract the "Date Added" field
         }));
 
         setBookmarks(structuredData);
@@ -100,9 +107,12 @@ function Bookmarks() {
     fetchData();
   }, []);
 
-  //
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value.toLowerCase());
+  };
+
   return (
-    <div className="bg-dark-gray p-8">
+    <div className="bg-dark-gray p-6">
       {/* Filtering */}
       <div className="text-center mb-6">
         <div className="p-6 rounded-xl shadow-md dark:bg-dark-gray inline-flex flex-col items-center">
@@ -112,11 +122,11 @@ function Bookmarks() {
               <button
                 key={key}
                 className={`py-2 px-6 text-sm font-medium rounded-full focus:outline-none border-2 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out 
-  ${
-    value
-      ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500 hover:bg-opacity-70 active:bg-opacity-80 active:scale-95`
-      : "bg-dark-gray text-gray-500 border-gray-500 hover:bg-opacity-70 dark:text-white"
-  }`}
+                ${
+                  value
+                    ? `bg-${filterColors[key]}-500 text-white border-${filterColors[key]}-500 hover:bg-opacity-70 active:bg-opacity-80 active:scale-95`
+                    : "bg-dark-gray text-gray-500 border-gray-500 hover:bg-opacity-70 dark:text-white"
+                }`}
                 onClick={() => handleFilter(key)}
               >
                 {key}
@@ -126,24 +136,36 @@ function Bookmarks() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto max-h-[80vh]">
-        {bookmarks.map((bookmark, index) => {
-          if (filter[bookmark.tag]) {
-            return (
-              <div
-                key={index}
-                className="bg-gray-950 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <Bookmark
-                  title={bookmark.title}
-                  link={bookmark.link}
-                  notes={bookmark.notes}
-                  tag={bookmark.tag}
-                />
-              </div>
-            );
-          }
-        })}
+      {/* Search Bar */}
+      <div className="text-center mb-6">
+        <input
+          type="text"
+          placeholder="Search bookmarks..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="w-full p-3 rounded-md border-2 border-gray-300 dark:border-gray-700 focus:border-blue-500 focus:outline-none mb-4"
+        />
+      </div>
+
+      {/* Bookmark List */}
+      <div className="max-h-[80vh] overflow-y-auto">
+        {bookmarks
+          .filter((bookmark) =>
+            // Filter bookmarks based on search query and tag filters
+            (filter[bookmark.tag] &&
+              (bookmark.title.toLowerCase().includes(searchQuery) ||
+                bookmark.notes.toLowerCase().includes(searchQuery)))
+          )
+          .map((bookmark, index) => (
+            <Bookmark
+              key={index}
+              title={bookmark.title}
+              link={bookmark.link}
+              notes={bookmark.notes}
+              tag={bookmark.tag}
+              dateAdded={bookmark.dateAdded}
+            />
+          ))}
       </div>
     </div>
   );
