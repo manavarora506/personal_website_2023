@@ -94,12 +94,12 @@ export function Home() {
                   </a>
                 </p>
                 <p>
-                  I am a recent graduate of The University of Texas at Austin
+                  I am a software engineer at Visa and a graduate of The University of Texas at Austin
                   where I studied electrical and computer engineering. I pride
                   myself on being a fast self-learner and having excpetionally
                   strong communication skills. These days I am learning more
-                  about full-stack development, generative AI, and cloud
-                  computing.
+                  about building agents, Austrian economics, and Russian
+                  literature.
                 </p>
               </div>
             </SectionContent>
@@ -143,27 +143,6 @@ export function Home() {
                   date={""}
                 />
               </div>
-            </SectionContent>
-          </SectionContainer>
-
-          {/* Where */}
-          <SectionContainer>
-            <SectionTitle>Where</SectionTitle>
-            <SectionContent>
-              <Image
-                priority
-                src="/static/img/waller_pic.png"
-                width={550}
-                height={300}
-                layout="responsive"
-                className="rounded-xl"
-                quality={100}
-                alt="Map of Austin"
-              />
-              <p className="flex items-center justify-end pt-2 space-x-2 text-sm text-quaternary md:text-right">
-                <MapPin size={12} />
-                <span>Austin, TX</span>
-              </p>
             </SectionContent>
           </SectionContainer>
 

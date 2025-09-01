@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 
 function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,6 +13,12 @@ function Chatbot() {
   const [userInput, setUserInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [bottomPosition, setBottomPosition] = useState("5%");
+  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
+
+  const scrollToBottom = useCallback(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const handleResize = useCallback(() => {
     if (window.innerHeight < 400) {
@@ -36,22 +42,40 @@ function Chatbot() {
     };
   }, [isOpen, handleResize]);
 
-  const handleSendMessage = async () => {
-    setIsLoading(true);
-    const response = await fetch("/.netlify/functions/ask", {
-      method: "POST",
-      body: JSON.stringify({ question: userInput }),
-      headers: { "Content-Type": "application/json" },
-    });
-    const data = await response.json();
+  // Auto scroll to bottom when messages change
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading, scrollToBottom]);
 
-    setMessages([
-      ...messages,
-      { type: "user", content: userInput },
-      { type: "bot", content: data.answer },
-    ]);
+  const handleSendMessage = async () => {
+    if (!userInput.trim()) return;
+    
+    const newUserMessage = { type: "user", content: userInput };
+    setMessages(prev => [...prev, newUserMessage]);
+    const currentInput = userInput;
     setUserInput("");
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/.netlify/functions/ask", {
+        method: "POST",
+        body: JSON.stringify({ question: currentInput }),
+        headers: { "Content-Type": "application/json" },
+      });
+      const data = await response.json();
+
+      setMessages(prev => [...prev, { type: "bot", content: data.answer }]);
+    } catch (error) {
+      setMessages(prev => [...prev, { type: "bot", content: "Sorry, I'm having trouble connecting. Please try again." }]);
+    }
+    
     setIsLoading(false);
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSendMessage();
+    }
   };
 
   const handleInputBlur = () => {
@@ -59,67 +83,111 @@ function Chatbot() {
   };
 
   return (
-    <div className={`fixed bottom-${isInputFocused ? "50%" : "5"} right-5`}>
+    <div className="fixed bottom-5 right-5 z-50">
+      {/* Chat Toggle Button */}
       <div
-        className="chatbot-toggle bg-black border hover:bg-off-white hover:text-off-black font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-white dark:text-off-black dark:hover:bg-off-black dark:hover:text-off-white"
+        className={`chatbot-toggle bg-gray-900 hover:bg-black text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer rounded-full p-4 ${isOpen ? 'rotate-180' : ''}`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"
-          />
-        </svg>
+        {isOpen ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
+        )}
       </div>
 
+      {/* Chat Window */}
       {isOpen && (
-        <div className="chatbot-container max-h-[80vh] overflow-hidden rounded">
-          <div className="chatbot-header p-2 bg-off-white flex justify-between items-center">
-            <p className="text-3xl font-semibold max-w-max dark:text-black">
-              manav-ai
-            </p>
+        <div className="chatbot-container mb-4 w-80 sm:w-96 bg-white dark:bg-gray-800 rounded-2xl shadow-2xl overflow-hidden transform transition-all duration-300 animate-in slide-in-from-bottom-4">
+          {/* Header */}
+          <div className="chatbot-header bg-gray-900 text-white p-4 flex justify-between items-center">
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center">
+                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-lg">Manav AI</h3>
+                <p className="text-xs text-white text-opacity-80">Ask me anything!</p>
+              </div>
+            </div>
+            
+            {/* Close Button */}
             <button
               onClick={() => setIsOpen(false)}
-              className="bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
+              className="hover:bg-gray-700 p-2 rounded-lg transition-colors duration-200 group"
             >
-              X
+              <svg className="w-4 h-4 group-hover:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
           </div>
 
-          <div className="chatbot-messages p-2 space-y-4 overflow-y-auto max-h-[70vh]">
+          {/* Messages */}
+          <div 
+            ref={messagesContainerRef}
+            className="chatbot-messages p-4 space-y-3 overflow-y-auto max-h-[60vh] bg-gray-50 dark:bg-gray-900 scroll-smooth"
+            style={{ scrollBehavior: 'smooth' }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
-                className={`p-2 rounded-lg ${message.type === "user" ? "bg-sky-200 self-end" : "bg-gray-100"}`}
+                className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
               >
-                {message.content}
+                <div
+                  className={`max-w-[80%] p-3 rounded-2xl ${
+                    message.type === "user"
+                      ? "bg-gray-900 text-white rounded-br-md"
+                      : "bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200 shadow-sm border dark:border-gray-600 rounded-bl-md"
+                  }`}
+                >
+                  <p className="text-sm leading-relaxed">{message.content}</p>
+                </div>
               </div>
             ))}
-            {isLoading && <div className="bot-message">Loading...</div>}
+            {isLoading && (
+              <div className="flex justify-start">
+                <div className="bg-white dark:bg-gray-700 p-3 rounded-2xl rounded-bl-md shadow-sm border dark:border-gray-600">
+                  <div className="flex space-x-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                  </div>
+                </div>
+              </div>
+            )}
+            {/* Invisible element to scroll to */}
+            <div ref={messagesEndRef} />
           </div>
 
-          <div className="chatbot-input p-2">
-            <input
-              onFocus={() => setInputFocus(true)}
-              onBlur={handleInputBlur}
-              onChange={(e) => setUserInput(e.target.value)}
-              placeholder="Type your message..."
-              className="w-full p-2 border rounded"
-            />
-            <button
-              onClick={handleSendMessage}
-              className="mt-2 px-4 py-2 bg-off-white border border-off-black hover:bg-off-black hover:text-off-white font-medium text-sm py-2 px-3 mr-2 rounded text-center dark:bg-off-black dark:text-off-white dark:hover:bg-off-white dark:border-off-white dark:hover:text-off-black"
-            >
-              Send
-            </button>
+          {/* Input */}
+          <div className="chatbot-input p-4 bg-white dark:bg-gray-800 border-t dark:border-gray-700">
+            <div className="flex space-x-2">
+              <input
+                value={userInput}
+                onFocus={() => setInputFocus(true)}
+                onBlur={handleInputBlur}
+                onChange={(e) => setUserInput(e.target.value)}
+                onKeyPress={handleKeyPress}
+                placeholder="Type your message..."
+                className="flex-1 p-3 border dark:border-gray-600 rounded-xl focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent bg-gray-50 dark:bg-gray-700 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                disabled={isLoading}
+              />
+              <button
+                onClick={handleSendMessage}
+                disabled={isLoading || !userInput.trim()}
+                className="bg-gray-900 hover:bg-black disabled:opacity-50 disabled:cursor-not-allowed text-white p-3 rounded-xl transition-all duration-200 flex items-center justify-center min-w-[48px]"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       )}
