@@ -3,6 +3,7 @@ import { MapPin } from "react-feather";
 import { Detail } from "../Detail";
 import { HomeData } from "../../data/HomeData";
 import Chatbot from "../Chatbot";
+import { STRIPE_CONFIG } from "../../config/stripe";
 
 function SectionTitle(props) {
   return (
@@ -142,6 +143,27 @@ export function Home() {
                   subtitle={"Listen"}
                   date={""}
                 />
+              </div>
+            </SectionContent>
+          </SectionContainer>
+
+          {/* Donate a Coffee */}
+          <SectionContainer>
+            <SectionTitle>Support</SectionTitle>
+            <SectionContent>
+              <div className="flex flex-col space-y-3">
+                <a
+                  href={STRIPE_CONFIG.PAYMENT_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700 rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 space-x-2"
+                >
+                  <span className="text-2xl">☕</span>
+                  <span>{STRIPE_CONFIG.BUTTON_TEXT}</span>
+                </a>
+                <p className="text-sm text-tertiary">
+                  {STRIPE_CONFIG.DESCRIPTION}
+                </p>
               </div>
             </SectionContent>
           </SectionContainer>
