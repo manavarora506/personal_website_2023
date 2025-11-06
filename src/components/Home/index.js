@@ -3,6 +3,7 @@ import { MapPin } from "react-feather";
 import { Detail } from "../Detail";
 import { HomeData } from "../../data/HomeData";
 import Chatbot from "../Chatbot";
+import { Donation } from "../Donation";
 
 function SectionTitle(props) {
   return (
@@ -96,7 +97,7 @@ export function Home() {
                 <p>
                   I am a software engineer at Visa and a graduate of The University of Texas at Austin
                   where I studied electrical and computer engineering. I pride
-                  myself on being a fast self-learner and having excpetionally
+                  myself on being a fast self-learner and having exceptionally
                   strong communication skills. These days I am learning more
                   about building agents, Austrian economics, and Russian
                   literature.
@@ -104,7 +105,6 @@ export function Home() {
               </div>
             </SectionContent>
           </SectionContainer>
-
           {/* Socials */}
           <SectionContainer>
             <SectionTitle>Online</SectionTitle>
